@@ -20,7 +20,7 @@ The goals / steps of this project are the following:
 [image8]: ./output_images/test_3_proc.jpeg "Test Image 1 Processed"
 [image9]: ./test_images/test6.jpg "Test Image 2"
 [image10]: ./output_images/test_1_proc.jpeg "Test Image 2 Processed"
-[image11]: ./test_images/test2.jpg "Test Image 3"
+[image11]: ./test_images/test4.jpg "Test Image 3"
 [image12]: ./output_images/test_5_proc.jpeg "Test Image 3 Processed"
 
 ---
@@ -102,7 +102,7 @@ Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spat
 
 ### Video Implementation
 
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
+#### 1. Provide a link to your final video output [click on the image to open YouTube Video]
 
 | Original Project Video | Processed Project Video |
 |:---:|:---:|
