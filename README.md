@@ -12,12 +12,10 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 [image1]: ./output_images/HOG_test.png "HOG Implementation on car image"
 [image2]: ./output_images/non_carHOG_test.png "HOG Implementation on non-car image"
-[image3]: ./examples/sliding_windows.jpg
-[image4]: ./examples/sliding_window.jpg
-[image5]: ./examples/bboxes_and_heat.png
-[image6]: ./examples/labels_map.png
-[image7]: ./examples/output_bboxes.png
-[video1]: ./project_video.mp4
+[image3]: ./output_images/window1.jpeg "Search Window Area 1"
+[image4]: ./output_images/window2.jpeg "Search Window Area 2"
+[image5]: ./output_images/window3.jpeg "Search Window Area 3"
+[image6]: ./output_images/all_windows.jpeg "Search Window Area - All"
 
 ---
 
@@ -58,32 +56,35 @@ Based on trial and error in detecting vehicle in a test image, I used `9` for HO
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
 Lines 93 through 131 (in vehicle_detect.py) is the code section used for training the LinearSVC (with linear kernel) ```svc = LinearSVC(C=0.01)```
+```C=0.01``` regularisation parameter was used. Lower C value should cause some misclassification, but the hyperplane which is drawn between the separate datasets is more closer to each dataset. The ```features``` matrix with color features, and HOG features may cause the datasets to be very close, hence lower C value was used here. Experimentally, the lower C value resulted in better classification. ```C = 1, 0.1 and 0.01``` was tried. 
 
 ###Sliding Window Search
 
 ####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
 
-![alt text][image3]
+| Window Search Area 1 | Window Search Area 2 |
+|:---:|:---:|
+| ![alt text][image3] | ![alt text][image4] |
+| Window Search Area 3 | Window Search Area - All |
+| ![alt text][image5] | ![alt text][image6] |
 
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
 Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
-![alt text][image4]
 ---
 
 ### Video Implementation
 
-####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
+#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
 
 | Original Project Video | Processed Project Video |
 |:---:|:---:|
 | [![Vehicle Detection Raw](https://i.ytimg.com/vi/ntsQ03OSk7s/maxresdefault.jpg)](https://youtu.be/ntsQ03OSk7s) | [![Vehicle Detection Processed](https://i.ytimg.com/vi/l7zqSn8HCXg/maxresdefault.jpg)](https://youtu.be/l7zqSn8HCXg) |
 
 
-####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
+#### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
 I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
 
@@ -103,9 +104,11 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 ---
 
-###Discussion
+### Discussion
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
 Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+
+### References
 
