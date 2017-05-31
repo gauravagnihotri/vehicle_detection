@@ -37,13 +37,20 @@ After exploring HLS, HSV and LUV colorspaces, I found out that YCrCb worked bett
 
 #### 2. Explain how you settled on your final choice of HOG parameters.
 
-`color_space = 'YCrCb' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb #possibly HLS
+```
+color_space = 'YCrCb' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb #possibly HLS
+
 orient = 9  # HOG orientations
+
 pix_per_cell = 8 # HOG pixels per cell
+
 cell_per_block = 2 # HOG cells per block
-hog_channel = "ALL" # Can be 0, 1, 2, or "ALL"`
+
+hog_channel = "ALL" # Can be 0, 1, 2, or "ALL"
+```
 
 `Using: 9 orientations 8 pixels per cell and 2 cells per block
+
 Feature vector length: 6156`
 
 Based on trial and error in detecting vehicle in a test image, I used `9` for HOG orientations, `8 HOG pixels per cell` and `2 HOG cells per block`. I observed slight improvement in accuracy with using `ALL` channels of the image in YCrCb colorspace
@@ -70,6 +77,7 @@ Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spat
 ### Video Implementation
 
 ####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
+
 | Original Project Video | Processed Project Video |
 |:---:|:---:|
 | [![Vehicle Detection Raw](https://i.ytimg.com/vi/ntsQ03OSk7s/maxresdefault.jpg)](https://youtu.be/ntsQ03OSk7s) | [![Vehicle Detection Processed](https://i.ytimg.com/vi/l7zqSn8HCXg/maxresdefault.jpg)](https://youtu.be/l7zqSn8HCXg) |
