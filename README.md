@@ -22,6 +22,7 @@ The goals / steps of this project are the following:
 [image10]: ./output_images/test_1_proc.jpeg "Test Image 2 Processed"
 [image11]: ./test_images/test4.jpg "Test Image 3"
 [image12]: ./output_images/test_5_proc.jpeg "Test Image 3 Processed"
+[image13]: ./output_images/test6_boxxed.jpeg "Test Image Boxxed"
 
 ---
 
@@ -89,7 +90,11 @@ overlaps = [(0.5, 0.5),(0.5, 0.5),(0.5, 0.5)]
 
 #### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
+I tried to optimize multiple parameters to obtain the best classification and minimize any misclassification.
+Firstly, I tried multiple colorspaces (RGB, HLS, HSV, LUV and YCrCb) and guaged the performance of the pipeline and detection zones. 
+I tried multiple window sizes (128,128), (96,96), (80,80), (64,64) and (48,48) with differnet overlapping parameters (95%, 80%, 75%, 50% and 25%)
+I also tried multiple Y limits to avoid searching for cars in the air and limiting the search for distant objects with smaller window sizes. 
+The SVC regularization parameter `C` was also modified from 1, 0.1 to 0.01. 
 
 | Test Image 1 | Test Image 1 Processed |
 |:---:|:---:|
@@ -111,13 +116,13 @@ Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spat
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
+From Project Quiz[2] functions ```add_heat```, ```apply_threshold``` and ```draw_labeled_bboxes``` were used to record 'hot windows' obtained from sliding window search result. These 'hot windows' were added to a blank image using ```add_heat``` function, further, using ```apply_threshold``` function, windows with lower than 2 overlapping detections were eliminated. The label() function from scipy.ndimage.measurements was used to separate multiple vehicles detected in a heatmap. Further the ```draw_labeled_bboxes``` function was used to draw a box on detected cars. 
 
-Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
 
-### Here are six frames and their corresponding heatmaps:
+### Here is the example of an image and its corresponding 'detected' boxes:
 
-![alt text][image5]
+| Test Sample Image | Test Sample Detections |
+| ![alt text][image9] | ![alt text][image13] |
 
 ### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
 ![alt text][image6]
