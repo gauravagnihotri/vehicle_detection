@@ -21,9 +21,9 @@ The goals / steps of this project are the following:
 
 ---
 
-###Histogram of Oriented Gradients (HOG)
+### Histogram of Oriented Gradients (HOG)
 
-####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
+#### 1. Explain how (and identify where in your code) you extracted HOG features from the training images.
 
 Lines 75 through 84 (in vehicle_detect.py) defines the parameters used to extract the hog features. The ```YCrCb``` colorspace was used with 'ALL' Channels.
 Before performing HOG feature extraction, spatial binning feature extraction was performed with spatial size of ```(16,16)```, Histogram Feature Extraction was performed with ```32``` histogram bins. The ```extract_features``` function was used to extract features of cars and non-car images. The ```extract_features``` is used from the ```lesson_functions.py```[1] The ```get_hog_features``` function was used to extract the HOG features (lines 6 through 23 in ```lesson_functions.py```
