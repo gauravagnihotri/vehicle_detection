@@ -16,6 +16,12 @@ The goals / steps of this project are the following:
 [image4]: ./output_images/window2.jpeg "Search Window Area 2"
 [image5]: ./output_images/window3.jpeg "Search Window Area 3"
 [image6]: ./output_images/all_windows.jpeg "Search Window Area - All"
+[image7]: ./test_images/test_1.jpg "Test Image 1"
+[image8]: ./output_images/test_1_proc.jpg "Test Image 1 Processed"
+[image9]: ./test_images/test_4.jpg "Test Image 2"
+[image10]: ./output_images/test_4_proc.jpg "Test Image 2 Processed"
+[image11]: ./test_images/test_5.jpg "Test Image 3"
+[image12]: ./output_images/test_5_proc.jpg "Test Image 3 Processed"
 
 ---
 
@@ -58,10 +64,22 @@ Based on trial and error in detecting vehicle in a test image, I used `9` for HO
 Lines 93 through 131 (in vehicle_detect.py) is the code section used for training the LinearSVC (with linear kernel) ```svc = LinearSVC(C=0.01)```
 ```C=0.01``` regularisation parameter was used. Lower C value should cause some misclassification, but the hyperplane which is drawn between the separate datasets is more closer to each dataset. The ```features``` matrix with color features, and HOG features may cause the datasets to be very close, hence lower C value was used here. Experimentally, the lower C value resulted in better classification. ```C = 1, 0.1 and 0.01``` was tried. 
 
-###Sliding Window Search
+### Sliding Window Search
 
-####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
+#### 1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
+Functions ```slide_window``` (lines 103 through 142 in lesson_functions.py) and ```search_windows``` (lines 231 through 259 in vehicle_detect.py) were used in performing sliding window search (lines 299 through 306 in lesson_functions.py) on a selected section of the video.
+The following parameters were used to perform the sliding search. ```x_start_stop``` and ```y_start_stop``` are X and Y limits used for performing the search. 
+Window sizes used for these arrays were `128,128`, `96,96` and `80,80` with 50% overlap for each window.
+```
+y_start_stop = [[400,656],[400,656],[390,550]] # Min and max in y to search in slide_window()
+
+window_size = [(128, 128),(96, 96),(80,80)]
+
+x_start_stop = [[412, None],[412, None],[412, 1280]]
+
+overlaps = [(0.5, 0.5),(0.5, 0.5),(0.5, 0.5)]
+```
 
 | Window Search Area 1 | Window Search Area 2 |
 |:---:|:---:|
@@ -69,10 +87,17 @@ Lines 93 through 131 (in vehicle_detect.py) is the code section used for trainin
 | Window Search Area 3 | Window Search Area - All |
 | ![alt text][image5] | ![alt text][image6] |
 
-####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
+#### 2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
 Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
 
+| Test Image 1 | Test Image 1 Processed |
+|:---:|:---:|
+| ![alt text][image7] | ![alt text][image8] |
+| Test Image 2 | Test Image 2 Processed |
+| ![alt text][image9] | ![alt text][image10] |
+| Test Image 3 | Test Image 3 Processed |
+| ![alt text][image11] | ![alt text][image12] |
 ---
 
 ### Video Implementation
