@@ -23,7 +23,8 @@ The goals / steps of this project are the following:
 [image11]: ./test_images/test4.jpg "Test Image 3"
 [image12]: ./output_images/test_5_proc.jpeg "Test Image 3 Processed"
 [image13]: ./output_images/test6_boxxed.jpeg "Test Image Boxxed"
-[image14]: ./output_images/test6_heatmap.jpeg "Test Image Boxxed"
+[image14]: ./output_images/test6_heatmap.jpeg "Test Image Heatmapped"
+[image15]: ./output_images/test6_res.jpeg "Test Image Final Bounding Box"
 
 ---
 
@@ -63,6 +64,8 @@ Based on trial and error in detecting vehicle in a test image, I used `9` for HO
 
 #### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
+Udacity's large data set (8968 non-car and 8792 car images) was used to train the SVM classifier. Lines 26 through 38 in vehicle_detect.py uses a loop which adds prefix 'non' to the non-car images. This prefix is later used as a filter for separating images as car or non-car images. 
+ 
 Lines 93 through 131 (in vehicle_detect.py) is the code section used for training the LinearSVC (with linear kernel) ```svc = LinearSVC(C=0.01)```
 ```C=0.01``` regularisation parameter was used. Lower C value should cause some misclassification, but the hyperplane which is drawn between the separate datasets is more closer to each dataset. The ```features``` matrix with color features, and HOG features may cause the datasets to be very close, hence lower C value was used here. Experimentally, the lower C value resulted in better classification. ```C = 1, 0.1 and 0.01``` was tried. 
 
@@ -126,13 +129,13 @@ From Project Quiz[2] functions ```add_heat```, ```apply_threshold``` and ```draw
 |:---:|:---:|
 | ![alt text][image9] | ![alt text][image13] |
 
-### Here is an example of the above image with overlayed 'heatmap'
+### Here is an example of the same image with overlayed 'heatmap':
 ![alt text][image14]
 
-### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
+### Here the resulting bounding box drawn after applying threshold:
+![alt text][image15]
 
-
+In addition to the building heatmap and applying thresholds, a class named ```BoxQueue``` is used as buffer to store and average out the boxes w.r.t. time (lines 261 through 278 in vehicle_detect.py). 
 
 ---
 
@@ -140,7 +143,14 @@ From Project Quiz[2] functions ```add_heat```, ```apply_threshold``` and ```draw
 
 #### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+1. False detections are one of the major issues that I faced while building the pipeline. Applying heatmap and thresholding did not necessarily eliminate all false detections, using averaging technique with a class definitely smoothened out any issues in my pipeline. It took quite a while to fine tune all the HOG parameters, window parameters, search area, heatmapping and thresholding parameters and averaging. 
+
+2. The current pipeline is not robust enough due to inherent issues with training using SVM. Limited amount of training data was used in constructing the Linear SVC model (~8800 car and ~8900 non car images). The model will not perform very well in complex real situations (buses? tractors? bikes?). Training a model with larger dataset may address some issues. Using complex modeling techniques may further improve the accuracy of the model for larger data sets (eg. CNN) 
+
+3. The sliding window technique implementation in this pipeline is highly unoptimized. The entire search area is examined for each frame which is computationally intensive and inefficient. Improving the code for identifying hotspots and performing HOG on entire image with subsampling may address some issues partially. 
 
 ### References
+[1] Lesson 34 Search and Classify - Project: Vehicle Detection and Tracking
+
+[2] Lesson 37 Multiple Detections and False Positives - Project: Vehicle Detection and Tracking
 
