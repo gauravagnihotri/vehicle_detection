@@ -16,12 +16,12 @@ The goals / steps of this project are the following:
 [image4]: ./output_images/window2.jpeg "Search Window Area 2"
 [image5]: ./output_images/window3.jpeg "Search Window Area 3"
 [image6]: ./output_images/all_windows.jpeg "Search Window Area - All"
-[image7]: ./test_images/test_1.jpg "Test Image 1"
-[image8]: ./output_images/test_1_proc.jpg "Test Image 1 Processed"
-[image9]: ./test_images/test_4.jpg "Test Image 2"
-[image10]: ./output_images/test_4_proc.jpg "Test Image 2 Processed"
-[image11]: ./test_images/test_5.jpg "Test Image 3"
-[image12]: ./output_images/test_5_proc.jpg "Test Image 3 Processed"
+[image7]: ./test_images/test1.jpg "Test Image 1"
+[image8]: ./output_images/test_1_proc.jpeg "Test Image 1 Processed"
+[image9]: ./test_images/test4.jpg "Test Image 2"
+[image10]: ./output_images/test_4_proc.jpeg "Test Image 2 Processed"
+[image11]: ./test_images/test5.jpg "Test Image 3"
+[image12]: ./output_images/test_5_proc.jpeg "Test Image 3 Processed"
 
 ---
 
