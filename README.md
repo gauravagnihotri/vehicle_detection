@@ -122,6 +122,7 @@ From Project Quiz[2] functions ```add_heat```, ```apply_threshold``` and ```draw
 ### Here is the example of an image and its corresponding 'detected' boxes:
 
 | Test Sample Image | Test Sample Detections |
+|:---:|:---:|
 | ![alt text][image9] | ![alt text][image13] |
 
 ### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
