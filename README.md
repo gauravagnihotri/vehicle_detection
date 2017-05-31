@@ -29,20 +29,24 @@ Lines 75 through 84 (in vehicle_detect.py) defines the parameters used to extrac
 Before performing HOG feature extraction, spatial binning feature extraction was performed with spatial size of ```(16,16)```, Histogram Feature Extraction was performed with ```32``` histogram bins. The ```extract_features``` function was used to extract features of cars and non-car images. The ```extract_features``` is used from the ```lesson_functions.py```[1] The ```get_hog_features``` function was used to extract the HOG features (lines 6 through 23 in ```lesson_functions.py```
 
 ![alt text][image1]
-*Figure shows each channel for a sample car image along with their HOG implementations*
+*Figure shows each channel (of YCrCb colorspace)  for a sample car image along with their HOG implementations*
 ![alt text][image2]
-*Figure shows each channel for a sample non-car image along with their HOG implementations*
+*Figure shows each channel (of YCrCb colorspace) for a sample non-car image along with their HOG implementations*
 
-I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
-
-Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
-
-
-![alt text][image2]
+After exploring HLS, HSV and LUV colorspaces, I found out that YCrCb worked better in identifying the car images. The detection rate and number of duplicates was optimal with YCrCb colorspace. Multiple detections are important, since they help in removing false detections. 
 
 ####2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters and...
+`color_space = 'YCrCb' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb #possibly HLS
+orient = 9  # HOG orientations
+pix_per_cell = 8 # HOG pixels per cell
+cell_per_block = 2 # HOG cells per block
+hog_channel = "ALL" # Can be 0, 1, 2, or "ALL"`
+
+`Using: 9 orientations 8 pixels per cell and 2 cells per block
+Feature vector length: 6156`
+
+Based on trial and error in detecting vehicle in a test image, I used `9` for HOG orientations, `8 HOG pixels per cell` and `2 HOG cells per block`. I observed slight improvement in accuracy with using `ALL` channels of the image in YCrCb colorspace
 
 ####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
