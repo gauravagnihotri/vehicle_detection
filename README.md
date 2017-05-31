@@ -35,7 +35,7 @@ Before performing HOG feature extraction, spatial binning feature extraction was
 
 After exploring HLS, HSV and LUV colorspaces, I found out that YCrCb worked better in identifying the car images. The detection rate and number of duplicates was optimal with YCrCb colorspace. Multiple detections are important, since they help in removing false detections. 
 
-####2. Explain how you settled on your final choice of HOG parameters.
+#### 2. Explain how you settled on your final choice of HOG parameters.
 
 `color_space = 'YCrCb' # Can be RGB, HSV, LUV, HLS, YUV, YCrCb #possibly HLS
 orient = 9  # HOG orientations
@@ -48,9 +48,9 @@ Feature vector length: 6156`
 
 Based on trial and error in detecting vehicle in a test image, I used `9` for HOG orientations, `8 HOG pixels per cell` and `2 HOG cells per block`. I observed slight improvement in accuracy with using `ALL` channels of the image in YCrCb colorspace
 
-####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
+#### 3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM using...
+Lines 93 through 131 (in vehicle_detect.py) is the code section used for training the LinearSVC (with linear kernel) ```svc = LinearSVC(C=0.01)```
 
 ###Sliding Window Search
 
@@ -70,7 +70,9 @@ Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spat
 ### Video Implementation
 
 ####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
-Here's a [link to my video result](./project_video.mp4)
+| Original Project Video | Processed Project Video |
+|:---:|:---:|
+| [![Vehicle Detection Raw](https://i.ytimg.com/vi/ntsQ03OSk7s/maxresdefault.jpg)](https://youtu.be/ntsQ03OSk7s) | [![Vehicle Detection Processed](https://i.ytimg.com/vi/l7zqSn8HCXg/maxresdefault.jpg)](https://youtu.be/l7zqSn8HCXg) |
 
 
 ####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
