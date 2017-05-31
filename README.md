@@ -23,6 +23,7 @@ The goals / steps of this project are the following:
 [image11]: ./test_images/test4.jpg "Test Image 3"
 [image12]: ./output_images/test_5_proc.jpeg "Test Image 3 Processed"
 [image13]: ./output_images/test6_boxxed.jpeg "Test Image Boxxed"
+[image14]: ./output_images/test6_heatmap.jpeg "Test Image Boxxed"
 
 ---
 
@@ -125,8 +126,8 @@ From Project Quiz[2] functions ```add_heat```, ```apply_threshold``` and ```draw
 |:---:|:---:|
 | ![alt text][image9] | ![alt text][image13] |
 
-### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
+### Here is an example of the above image with overlayed 'heatmap'
+![alt text][image14]
 
 ### Here the resulting bounding boxes are drawn onto the last frame in the series:
 ![alt text][image7]
